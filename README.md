@@ -14,6 +14,7 @@ Uncomment `let dsn = "mongodb://localhost:27017/documents"`.
 Create user and cluster. Now create a file `.env` in the root of this project with atlas username and password from the cluster like so:
 
 ATLAS_USERNAME="xxxxxx"
+
 ATLAS_PASSWORD="xxxxxx"
 
 ## Available Scripts
