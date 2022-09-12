@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Document1",
+        "content": "Här är lite text."
+    },
+    {
+        "name": "Document2",
+        "content": "Här är mer text."
+    },
+    {
+        "name": "Document3",
+        "content": "Här är jättemycket text."
+    }
+]
