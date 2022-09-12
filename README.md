@@ -11,7 +11,7 @@ In file `db/database.js`: Comment out `let dsn = mongodb+srv://${process.env.ATL
 Uncomment `let dsn = "mongodb://localhost:27017/documents"`.
 
 ### Use MongoDB Atlas
-Create user and cluster. Now create a file `env` in the root of this project with atlas username and password from the cluster like so:
+Create user and cluster. Now create a file `.env` in the root of this project with atlas username and password from the cluster like so:
 
 ATLAS_USERNAME="xxxxxx"
 ATLAS_PASSWORD="xxxxxx"
@@ -38,7 +38,7 @@ Get all documents in database.
 
 ### `/`
 
-Insert new document in database. And _id will automatically be generated.
+Insert new document in database with optional attributes. An _id will automatically be generated.
 
 ### `/find`
 
@@ -50,7 +50,7 @@ Update existing attributes in one of your documents.
 
 ### `/reset`
 
-Resets the database, deleting all documents.
+Reset the database, deleting all documents.
 
 ### `/init`
 
