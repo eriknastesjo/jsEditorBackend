@@ -60,5 +60,7 @@ app.use(errorMiddleware);
 // });
 
 
-// Start up server
-app.listen(port, () => console.log(`API listening on port ${port}!`));
+// Start up server (save server as a variable so it can be imported and used for integration tests)
+const server = app.listen(port, () => console.log(`API listening on port ${port}!`));
+
+module.exports = server;
