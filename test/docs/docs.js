@@ -5,7 +5,7 @@
 
 /* global describe it */
 
- process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -86,7 +86,7 @@ describe('Paths', () => {
         });
     });
 
-    describe('POST / and /update', () => {
+    describe('POST /insert and /update', () => {
         const testName = "TestName";
         const testContent = "TestContent";
         const testNameUpdated = "TestNameUpdated";
@@ -119,6 +119,42 @@ describe('Paths', () => {
                     res.body.should.be.an("object");
                     res.body.data.result.should.be.an("object");
                     assert.equal(res.body.data.result.modifiedCount, 1);
+                    done();
+                });
+        });
+    });
+
+    describe('POST /insert and /find', () => {
+        const testName = "TestName";
+        const testContent = "TestContent";
+        let testId;
+
+        it('201 HAPPY PATH', (done) => {
+            chai.request(server)
+                .post("/insert")
+                .send({
+                    name: testName,
+                    content: testContent
+                })
+                .end((err, res) => {
+                    testId = res.body.data.result._id;
+                    done();
+                });
+        });
+
+        it('201 HAPPY PATH', (done) => {
+            chai.request(server)
+                .post("/find")
+                .send({
+                    _id: testId
+                })
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.should.be.an("object");
+                    res.body.data.result.should.be.an("object");
+                    assert.equal(res.body.data.result._id, testId);
+                    assert.equal(res.body.data.result.name, testName);
+                    assert.equal(res.body.data.result.content, testContent);
                     done();
                 });
         });
