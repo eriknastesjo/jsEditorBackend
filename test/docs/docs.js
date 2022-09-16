@@ -5,7 +5,7 @@
 
 /* global describe it */
 
-//  process.env.NODE_ENV = 'test';
+ process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -80,7 +80,7 @@ describe('Paths', () => {
                     res.should.have.status(201);
                     res.body.should.be.an("object");
                     res.body.data.result.should.be.an("string");
-                    assert.equal(res.body.data.result, "3 documents was inserted.");
+                    assert.equal(res.body.data.result, "3 documents were inserted.");
                     done();
                 });
         });
