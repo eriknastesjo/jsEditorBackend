@@ -55,7 +55,7 @@ Reset the database, deleting all documents.
 
 ### `/init`
 
-Initiating database with three arbitrary ggdocuments described in `data/docs.json`.
+Initiating database with three arbitrary documents described in `data/docs.json`.
 
 
 
