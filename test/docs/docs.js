@@ -35,13 +35,13 @@ describe('Paths', () => {
         });
     });
 
-    describe('POST /', () => {
+    describe('POST /insert', () => {
         it('201 HAPPY PATH', (done) => {
             const testName = "TestName";
             const testContent = "TestContent";
 
             chai.request(server)
-                .post("/")
+                .post("/insert")
                 .send({
                     name: testName,
                     content: testContent
@@ -95,7 +95,7 @@ describe('Paths', () => {
 
         it('201 HAPPY PATH', (done) => {
             chai.request(server)
-                .post("/")
+                .post("/insert")
                 .send({
                     name: testName,
                     content: testContent

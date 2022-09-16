@@ -146,7 +146,7 @@ const docModel = {
             await db.collection.deleteMany();
             const result = await db.collection.insertMany(initDocs);
 
-            const msg = `${result.insertedCount} documents was inserted.`;
+            const msg = `${result.insertedCount} documents were inserted.`;
 
             console.log(msg);
 

@@ -37,7 +37,7 @@ Get all documents in database.
 
 ## POST Routes
 
-### `/`
+### `/insert`
 
 Insert new document in database with optional attributes. An _id will automatically be generated.
 

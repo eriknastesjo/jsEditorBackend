@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 
-router.post("/", async (req, res) => {
+router.post("/insert", async (req, res) => {
     const newDoc = req.body;
 
     const result = await docModel.insertDoc(newDoc);
