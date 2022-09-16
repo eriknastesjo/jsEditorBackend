@@ -4,7 +4,6 @@ var router = express.Router();
 
 
 router.get("/", async (req, res) => {
-
     const docs = await docModel.getAllDocs();
 
     res.json({
@@ -17,7 +16,6 @@ router.get("/", async (req, res) => {
 
 
 router.post("/", async (req, res) => {
-
     const newDoc = req.body;
 
     const result = await docModel.insertDoc(newDoc);
@@ -32,8 +30,8 @@ router.post("/", async (req, res) => {
 
 
 router.post("/find", async (req, res) => {
-
     const docToFind = req.body;
+
     console.log(docToFind);
 
     const result = await docModel.findDoc(docToFind);
@@ -47,8 +45,8 @@ router.post("/find", async (req, res) => {
 });
 
 router.post("/update", async (req, res) => {
-
     const docToUpdate = req.body;
+
     console.log(docToUpdate);
 
     const result = await docModel.updateDoc(docToUpdate);
@@ -63,7 +61,6 @@ router.post("/update", async (req, res) => {
 
 
 router.post("/reset", async (req, res) => {
-
     const result = await docModel.reset();
 
     return res.status(201).json({
@@ -75,7 +72,6 @@ router.post("/reset", async (req, res) => {
 });
 
 router.post("/init", async (req, res) => {
-
     const result = await docModel.init();
 
     return res.status(201).json({

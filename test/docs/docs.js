@@ -1,25 +1,24 @@
 /**
  * Test for class Card.
  */
- "use strict";
+"use strict";
 
- /* global describe it */
+/* global describe it */
 
 //  process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../app.js');
- 
- var assert = require("assert");
- // const Card = require("../../src/card/card");
- const docModel = require("../../models/docModel")
+
+var assert = require("assert");
+// const Card = require("../../src/card/card");
 
 
 chai.should();
 
 chai.use(chaiHttp);
- 
+
 
 
 describe('Paths', () => {
@@ -40,6 +39,7 @@ describe('Paths', () => {
         it('201 HAPPY PATH', (done) => {
             const testName = "TestName";
             const testContent = "TestContent";
+
             chai.request(server)
                 .post("/")
                 .send({
@@ -87,7 +87,6 @@ describe('Paths', () => {
     });
 
     describe('POST / and /update', () => {
-
         const testName = "TestName";
         const testContent = "TestContent";
         const testNameUpdated = "TestNameUpdated";
@@ -95,8 +94,6 @@ describe('Paths', () => {
         let testId;
 
         it('201 HAPPY PATH', (done) => {
-
-
             chai.request(server)
                 .post("/")
                 .send({
@@ -127,8 +124,7 @@ describe('Paths', () => {
         });
     });
 
-// todo: skriv test för \find också (först insert sen find som när testar update)
-
+    // todo: skriv test för \find också (först insert sen find som när testar update)
 });
 
 

@@ -3,8 +3,10 @@ const initDocs = require("../data/docs.json");
 const ObjectId = require('mongodb').ObjectId;
 
 const docModel = {
-    // varför namnge funktionen? Här gör vi det för att om det blir fel i koden så skrivs funktionsnamnet ut. Om vi har anonym funktion så skrivs det bara ut som "anonymous".
-    getAllDocs: async function getAllDocs () {
+    // varför namnge funktionen?
+    // Här gör vi det för att om det blir fel i koden så skrivs funktionsnamnet ut.
+    // Om vi har anonym funktion så skrivs det bara ut som "anonymous".
+    getAllDocs: async function getAllDocs() {
         // req contains user object set in checkToken middleware
         let db;
 
@@ -14,13 +16,12 @@ const docModel = {
             const allDocs = await db.collection.find().toArray();
 
             return allDocs;
-
         } catch (error) {
             return {
                 errors: {
                     message: error.message
                 }
-            }
+            };
         } finally {
             await db.client.close();
         }
@@ -41,13 +42,12 @@ const docModel = {
                 ...newDoc,
                 _id: result.insertedId
             };
-
         } catch (error) {
             return {
                 errors: {
                     message: error.message
                 }
-            }
+            };
         } finally {
             await db.client.close();
         }
@@ -68,20 +68,18 @@ const docModel = {
             return {
                 ...result
             };
-
         } catch (error) {
             return {
                 errors: {
                     message: error.message
                 }
-            }
+            };
         } finally {
             await db.client.close();
         }
     },
 
     updateDoc: async function (req) {
-
         let db;
 
         try {
@@ -103,13 +101,12 @@ const docModel = {
 
 
             return result;
-
         } catch (error) {
             return {
                 errors: {
                     message: error.message
                 }
-            }
+            };
         } finally {
             await db.client.close();
         }
@@ -127,15 +124,15 @@ const docModel = {
             await db.collection.deleteMany();
 
             const msg = `Database reset.`;
+
             console.log(msg);
             return msg;
-
         } catch (error) {
             return {
                 errors: {
                     message: error.message
                 }
-            }
+            };
         } finally {
             await db.client.close();
         }
@@ -154,13 +151,12 @@ const docModel = {
             console.log(msg);
 
             return msg;
-
         } catch (error) {
             return {
                 errors: {
                     message: error.message
                 }
-            }
+            };
         } finally {
             await db.client.close();
         }

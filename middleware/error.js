@@ -12,6 +12,7 @@ var router = express.Router();
 // Put this last
 router.use((req, res, next) => {
     var err = new Error("Not Found");
+
     err.status = 404;
     next(err);
 });

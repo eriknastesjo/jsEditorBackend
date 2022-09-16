@@ -9,12 +9,9 @@ const app = express();
 
 const port = process.env.PORT || 1337;  // antingen i drift eller lokalt
 
-// // MongoDB
-// const mongo = require("mongodb").MongoClient;
-// const dsn = process.env.DBWEBB_DSN || "mongodb://localhost:27017/documents";   // antingen i drift eller lokalt
 
 const middleware = require("./middleware/index.js");
-const errorMiddleware = require("./middleware/error.js")
+const errorMiddleware = require("./middleware/error.js");
 
 const index = require('./routes/index');
 const hello = require('./routes/hello');
@@ -30,7 +27,8 @@ app.use(cors());
 
 //GENERAL MIDDLEWARE
 // ===================================
-app.use(middleware.logIncomingToConsole); // middleware that writes out route path and method in console
+// middleware that writes out route path and method in console
+app.use(middleware.logIncomingToConsole);
 // don't show the morgan log when it is test
 if (process.env.NODE_ENV !== 'test') {
     // use morgan to log at command line
@@ -42,7 +40,8 @@ if (process.env.NODE_ENV !== 'test') {
 // ROUTES
 // ===================================
 app.use('/', index);
-app.use('/hello', hello); // så URL:en behöver börja med /hello och sen fylla på med routenames från hello.js
+app.use('/hello', hello); // så URL:en behöver börja med /hello
+// och sen fylla på med routenames från hello.js
 
 
 
