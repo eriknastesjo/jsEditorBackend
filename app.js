@@ -32,10 +32,22 @@ app.use(cors());
 // ===================================
 const io = require("socket.io")(httpServer, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "*",
         methods: ["GET", "POST"]
     }
 });
+// const io = require("socket.io")(httpServer, {
+//     cors: {
+//         origin: "https://www.student.bth.se/~erna21/editor/",
+//         methods: ["GET", "POST"]
+//     }
+// });
+// const io = require("socket.io")(httpServer, {
+//     cors: {
+//         origin: "http://localhost:3000",
+//         methods: ["GET", "POST"]
+//     }
+// });
 
 io.sockets.on('connection', function (socket) {
     console.log("socket-id: " + socket.id); // Nått lång och slumpat
