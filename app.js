@@ -5,9 +5,13 @@ const cors = require('cors');
 
 // Express server
 const app = express();
-// const port = process.env.DBWEBB_PORT || 1337;   // antingen i drift eller lokalt
+
+// Spara http server som används "inom" app. Det används sedan för att skapa sockets.
+const httpServer = require("http").createServer(app);
 
 const port = process.env.PORT || 1337;  // antingen i drift eller lokalt
+
+
 
 
 const middleware = require("./middleware/index.js");
@@ -24,8 +28,42 @@ app.use(cors());
 
 
 
+// SOCKETS
+// ===================================
+const io = require("socket.io")(httpServer, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+    }
+});
 
-//GENERAL MIDDLEWARE
+io.sockets.on('connection', function (socket) {
+    console.log("socket-id: " + socket.id); // Nått lång och slumpat
+    socket.on('join', function (room) {
+        console.log("joining room: " + room);
+        socket.join(room);
+    });
+    socket.on('leave', function (room) {
+        console.log("leaving room: " + room);
+        socket.leave(room);
+    });
+    socket.on("name", function (data) {
+        console.log("update name");
+        console.log(data);
+        // socket.broadcast.emit("name", data);
+        socket.to(data["_id"]).emit("name", data);
+    });
+    socket.on("content", function (data) {
+        console.log("update content");
+        console.log(data);
+        // socket.broadcast.emit("content", data);
+        socket.to(data["_id"]).emit("content", data);
+    });
+
+});
+
+
+// GENERAL MIDDLEWARE
 // ===================================
 // middleware that writes out route path and method in console
 app.use(middleware.logIncomingToConsole);
@@ -60,6 +98,7 @@ app.use(errorMiddleware);
 
 
 // Start up server (save server as a variable so it can be imported and used for integration tests)
-const server = app.listen(port, () => console.log(`API listening on port ${port}!`));
+const server = httpServer.listen(port, () => console.log(`API listening on port ${port}!`));
+// const server = app.listen(port, () => console.log(`API listening on port ${port}!`));
 
 module.exports = server;
