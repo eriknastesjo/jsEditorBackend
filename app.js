@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const morgan = require('morgan');
 const cors = require('cors');
 
+
 // Express server
 const app = express();
 
@@ -12,13 +13,16 @@ const httpServer = require("http").createServer(app);
 const port = process.env.PORT || 1337;  // antingen i drift eller lokalt
 
 
-
-
 const middleware = require("./middleware/index.js");
 const errorMiddleware = require("./middleware/error.js");
 
 const index = require('./routes/index');
+const auth = require('./routes/auth');
 const hello = require('./routes/hello');
+
+
+// APP
+// ===================================
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -71,7 +75,6 @@ io.sockets.on('connection', function (socket) {
         // socket.broadcast.emit("content", data);
         socket.to(data["_id"]).emit("content", data);
     });
-
 });
 
 
@@ -90,6 +93,7 @@ if (process.env.NODE_ENV !== 'test') {
 // ROUTES
 // ===================================
 app.use('/', index);
+app.use('/auth', auth);
 app.use('/hello', hello); // så URL:en behöver börja med /hello
 // och sen fylla på med routenames från hello.js
 

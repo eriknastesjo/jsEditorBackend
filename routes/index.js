@@ -1,9 +1,11 @@
-var express = require('express');
+const express = require('express');
+const authModel = require('../models/authModel');
 const docModel = require('../models/docModel');
-var router = express.Router();
+const router = express.Router();
 
 
 router.get("/", async (req, res) => {
+    console.log("GETTING DOCS");
     const docs = await docModel.getAllDocs();
 
     res.json({
@@ -14,6 +16,21 @@ router.get("/", async (req, res) => {
     });
 });
 
+
+router.post("/findUsersDocs",
+    (req, res, next) => authModel.checkToken(req, res, next),
+    async (req, res) => {
+        const user = req.body;
+
+        const result = await docModel.findUsersDocs(user);
+
+        return res.status(201).json({
+            data: {
+                msg: "Got a POST request",
+                result: result
+            }
+        });
+    });
 
 router.post("/insert", async (req, res) => {
     const newDoc = req.body;

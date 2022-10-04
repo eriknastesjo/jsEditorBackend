@@ -1,13 +1,24 @@
 [
     {
+        "allowed_users": [
+            "test@test.com"
+        ],
         "name": "Document1",
         "content": "Här är lite text."
     },
     {
+        "allowed_users": [
+            "erik@erik.com",
+            "admin@admin.com"
+        ],
         "name": "Document2",
         "content": "Här är mer text."
     },
     {
+        "allowed_users": [
+            "test@test.com",
+            "admin@admin.com"
+        ],
         "name": "Document3",
         "content": "Här är jättemycket text."
     }

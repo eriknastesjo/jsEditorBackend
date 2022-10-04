@@ -27,6 +27,27 @@ const docModel = {
         }
     },
 
+    findUsersDocs: async function findUsersDocs(req) {
+        let db;
+
+        try {
+            db = await database.getDb();
+
+            const filter = { allowed_users: { $in: [req.user] } };
+            const result = await db.collection.find(filter).toArray();
+
+            return result;
+        } catch (error) {
+            return {
+                errors: {
+                    message: error.message
+                }
+            };
+        } finally {
+            await db.client.close();
+        }
+    },
+
     insertDoc: async function (newDoc) {
         let db;
 
