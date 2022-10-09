@@ -3,6 +3,12 @@ const bodyParser = require("body-parser");
 const morgan = require('morgan');
 const cors = require('cors');
 
+const { graphqlHTTP } = require('express-graphql');
+const RootQueryType = require("./graphql/root");
+const { GraphQLSchema } = require("graphql");
+
+
+
 
 // Express server
 const app = express();
@@ -32,12 +38,24 @@ app.use(cors());
 
 
 
+// GraphQL
+
+const schema = new GraphQLSchema({
+    query: RootQueryType
+});
+
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    graphiql: false, // Är satt till true under utveckling för att visualisera datan // TODO: SÄTT TILL FALSE VID DEPLOY
+}));
+
+
 // SOCKETS
 // ===================================
 const io = require("socket.io")(httpServer, {
     cors: {
         origin: "*",
-        methods: ["GET", "POST"]
+        methods: ["GET", "POST"],
     }
 });
 // const io = require("socket.io")(httpServer, {

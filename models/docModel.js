@@ -75,9 +75,12 @@ const docModel = {
     },
 
     findDoc: async function (req) {
+        console.log("heluuu");
+        console.log(req);
         let db;
 
         try {
+            console.log("ojoj");
             db = await database.getDb();
             const filter = { _id: ObjectId(req._id) };
             const result = await db.collection.findOne(filter);
