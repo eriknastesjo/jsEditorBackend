@@ -55,8 +55,6 @@ const docModel = {
             db = await database.getDb();
             const result = await db.collection.insertOne(newDoc);
 
-            console.log(result);
-
             // Vi slår ihop data om dokumentet (typ name och content)
             // med id:et som kommer tillbaka när vi får in dokumentet i databasen med insertOne()
             return {
@@ -75,12 +73,9 @@ const docModel = {
     },
 
     findDoc: async function (req) {
-        console.log("heluuu");
-        console.log(req);
         let db;
 
         try {
-            console.log("ojoj");
             db = await database.getDb();
             const filter = { _id: ObjectId(req._id) };
             const result = await db.collection.findOne(filter);
@@ -114,7 +109,8 @@ const docModel = {
             const updateDocument = {
                 $set: {
                     name: req.name,
-                    content: req.content
+                    content: req.content,
+                    comments: req.comments
                 },
             };
 
@@ -122,6 +118,9 @@ const docModel = {
                 filter,
                 updateDocument
             );
+
+            console.log("RESULTTAAAAAAAAAAAAT");
+            console.log(result);
 
 
             return result;

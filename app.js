@@ -33,7 +33,7 @@ const hello = require('./routes/hello');
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-// Tillåter klienter från andra domäner att använda sig av API:et (vad det nu betyder...?)
+// Tillåter klienter från andra domäner att använda sig av API:et
 app.use(cors());
 
 
@@ -46,7 +46,7 @@ const schema = new GraphQLSchema({
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,
-    graphiql: false, // Är satt till true under utveckling för att visualisera datan // TODO: SÄTT TILL FALSE VID DEPLOY
+    graphiql: true, // Är satt till true under utveckling för att visualisera datan // TODO: SÄTT TILL FALSE VID DEPLOY
 }));
 
 

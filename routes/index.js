@@ -64,6 +64,7 @@ router.post("/find", async (req, res) => {
 router.post("/update", async (req, res) => {
     const docToUpdate = req.body;
 
+    console.log("NYTTT");
     console.log(docToUpdate);
 
     const result = await docModel.updateDoc(docToUpdate);

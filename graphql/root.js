@@ -24,8 +24,8 @@ const RootQueryType = new GraphQLObjectType({
                 _id: { type: GraphQLString }
             },
             resolve: async function (parent, args) {
-                console.log("DET FUNKAAAR :D");
                 const result = await docModel.findDoc(args);  // modellen själv kommer leta i args._id!
+
                 return result;
             }
         },
