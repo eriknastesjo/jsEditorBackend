@@ -110,7 +110,7 @@ const docModel = {
                 $set: {
                     name: req.name,
                     content: req.content,
-                    comments: req.comments
+                    comments: req.comments,
                 },
             };
 
@@ -118,10 +118,6 @@ const docModel = {
                 filter,
                 updateDocument
             );
-
-            console.log("RESULTTAAAAAAAAAAAAT");
-            console.log(result);
-
 
             return result;
         } catch (error) {
@@ -135,8 +131,46 @@ const docModel = {
         }
     },
 
-    deleteDoc: async function () {
+    addUser: async function (req) {
+        let db;
 
+        try {
+            db = await database.getDb();
+
+            const filter = { _id: ObjectId(req._id) };
+
+            // because more than one user can be online at same time we need to first check if allowed_users has been updated
+            const currentDoc = await this.findDoc(req);
+
+            if (!currentDoc.allowed_users.includes(req.new_user)) {
+
+
+                const newAllowedUsers = [...currentDoc.allowed_users, req.new_user];
+
+                const updateDocument = {
+                    $set: {
+                        allowed_users: newAllowedUsers
+                    },
+                };
+
+                const result = await db.collection.updateOne(
+                    filter,
+                    updateDocument
+                );
+
+
+                return result;
+            }
+
+        } catch (error) {
+            return {
+                errors: {
+                    message: error.message
+                }
+            };
+        } finally {
+            await db.client.close();
+        }
     },
 
     reset: async function () {

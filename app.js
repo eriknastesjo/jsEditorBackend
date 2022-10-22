@@ -24,6 +24,7 @@ const errorMiddleware = require("./middleware/error.js");
 
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const mail = require('./routes/mail');
 const hello = require('./routes/hello');
 
 
@@ -113,6 +114,7 @@ if (process.env.NODE_ENV !== 'test') {
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/hello', hello); // så URL:en behöver börja med /hello
+app.use('/mail', mail);
 // och sen fylla på med routenames från hello.js
 
 

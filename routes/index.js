@@ -77,6 +77,18 @@ router.post("/update", async (req, res) => {
     });
 });
 
+router.post("/addUser", async (req, res) => {
+    const body = req.body;
+
+    const result = await docModel.addUser(body);
+
+    return res.status(201).json({
+        data: {
+            msg: "Got a POST request",
+            result: result
+        }
+    });
+});
 
 router.post("/reset", async (req, res) => {
     const result = await docModel.reset();

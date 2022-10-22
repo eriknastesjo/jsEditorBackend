@@ -14,6 +14,7 @@ const DocType = new GraphQLObjectType({
         _id: { type: new GraphQLNonNull(GraphQLString) },
         name: { type: new GraphQLNonNull(GraphQLString) },
         content: { type: new GraphQLNonNull(GraphQLString) },
+        allowed_users: { type: new GraphQLNonNull(new GraphQLList(GraphQLString)) },
         comments: { type: new GraphQLList(CommentType) },
     })
 });
