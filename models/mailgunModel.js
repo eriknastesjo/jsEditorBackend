@@ -32,13 +32,14 @@ const mailgunModel = {
         };
 
         mg.messages().send(data, function (error, body) {
-
             if (error) {
                 return res.status(400).json ({
                     status: 400,
                     message: "Error, email was not sent."
                 });
             }
+
+            console.log(body);
 
             return res.status(201).json({
                 status: 201,
