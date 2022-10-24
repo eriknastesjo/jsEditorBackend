@@ -4,8 +4,9 @@ require('dotenv').config();
 
 const mailgunModel = {
     send: function send(res, req) {
-        const apiKey = process.env.MG_API_KEY;
-        const domain = process.env.MG_DOMAIN;
+
+        const apiKey = process.env.MG_API_KEY ?? "apiKeyIsMissing";
+        const domain = process.env.MG_DOMAIN ?? "domainIsMissing";
 
         const mg = mailgun({ apiKey: apiKey, domain: domain });
 
