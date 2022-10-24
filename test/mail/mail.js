@@ -43,7 +43,8 @@ https://www.student.bth.se/~erna21/editor/
                 .send(email)
                 .end((err, res) => {
                     res.body.message.should.be.oneOf([
-                        "Error, email was not sent.",
+                        "Error, no API key was provided.",
+                        "Error, no domain was provided.",
                         "Email succesfully sent."
                     ]);
                     done();

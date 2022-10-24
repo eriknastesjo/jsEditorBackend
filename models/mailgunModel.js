@@ -4,9 +4,10 @@ require('dotenv').config();
 
 const mailgunModel = {
     send: function send(res, req) {
+        const apiKey = process.env.MG_API_KEY;
+        const domain = process.env.MG_DOMAIN;
 
-        const apiKey = process.env.MG_API_KEY ?? "apiKeyIsMissing";
-        const domain = process.env.MG_DOMAIN ?? "domainIsMissing";
+
 
         const mg = mailgun({ apiKey: apiKey, domain: domain });
 
@@ -20,6 +21,19 @@ const mailgunModel = {
         };
 
         mg.messages().send(data, function (error, body) {
+            if (!apiKey) {
+                return res.status(400).json({
+                    status: 400,
+                    message: "Error, no API key was provided."
+                });
+            }
+            if (!domain) {
+                return res.status(400).json({
+                    status: 400,
+                    message: "Error, no domain was provided."
+                });
+            }
+
             if (error) {
                 return res.status(400).json ({
                     status: 400,
