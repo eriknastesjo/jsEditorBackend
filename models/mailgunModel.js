@@ -7,7 +7,18 @@ const mailgunModel = {
         const apiKey = process.env.MG_API_KEY;
         const domain = process.env.MG_DOMAIN;
 
-
+        if (!apiKey) {
+            return res.status(400).json({
+                status: 400,
+                message: "Error, no API key was provided."
+            });
+        }
+        if (!domain) {
+            return res.status(400).json({
+                status: 400,
+                message: "Error, no domain was provided."
+            });
+        }
 
         const mg = mailgun({ apiKey: apiKey, domain: domain });
 
@@ -21,18 +32,6 @@ const mailgunModel = {
         };
 
         mg.messages().send(data, function (error, body) {
-            if (!apiKey) {
-                return res.status(400).json({
-                    status: 400,
-                    message: "Error, no API key was provided."
-                });
-            }
-            if (!domain) {
-                return res.status(400).json({
-                    status: 400,
-                    message: "Error, no domain was provided."
-                });
-            }
 
             if (error) {
                 return res.status(400).json ({
@@ -40,8 +39,6 @@ const mailgunModel = {
                     message: "Error, email was not sent."
                 });
             }
-
-            console.log(body);
 
             return res.status(201).json({
                 status: 201,
