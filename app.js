@@ -47,7 +47,7 @@ const schema = new GraphQLSchema({
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,
-    graphiql: true, // Är satt till true under utveckling för att visualisera datan // TODO: SÄTT TILL FALSE VID DEPLOY
+    graphiql: false, // todo: SÄTT TILL FALSE VID DEPLOY
 }));
 
 

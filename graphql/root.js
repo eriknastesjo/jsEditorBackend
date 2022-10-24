@@ -1,11 +1,7 @@
-const ObjectId = require('mongodb').ObjectId;
-
 const {
     GraphQLObjectType,
     GraphQLString,
     GraphQLList,
-    GraphQLFloat,
-    GraphQLNonNull
 } = require('graphql');
 
 const DocType = require("./docType.js");
@@ -24,7 +20,8 @@ const RootQueryType = new GraphQLObjectType({
                 _id: { type: GraphQLString }
             },
             resolve: async function (parent, args) {
-                const result = await docModel.findDoc(args);  // modellen själv kommer leta i args._id!
+                const result = await docModel.findDoc(args);
+                // modellen själv kommer leta i args._id!
 
                 return result;
             }

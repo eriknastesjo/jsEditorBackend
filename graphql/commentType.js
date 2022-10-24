@@ -1,8 +1,6 @@
 const {
     GraphQLObjectType,
     GraphQLString,
-    GraphQLList,
-    GraphQLNonNull
 } = require('graphql');
 
 const CommentType = new GraphQLObjectType({

@@ -5,7 +5,6 @@ const router = express.Router();
 
 
 router.get("/", async (req, res) => {
-    console.log("GETTING DOCS");
     const docs = await docModel.getAllDocs();
 
     res.json({
@@ -49,8 +48,6 @@ router.post("/insert", async (req, res) => {
 router.post("/find", async (req, res) => {
     const docToFind = req.body;
 
-    console.log(docToFind);
-
     const result = await docModel.findDoc(docToFind);
 
     return res.status(201).json({
@@ -63,9 +60,6 @@ router.post("/find", async (req, res) => {
 
 router.post("/update", async (req, res) => {
     const docToUpdate = req.body;
-
-    console.log("NYTTT");
-    console.log(docToUpdate);
 
     const result = await docModel.updateDoc(docToUpdate);
 

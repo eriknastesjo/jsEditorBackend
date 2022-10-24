@@ -1,9 +1,9 @@
 const mailgun = require("mailgun-js");
+
 require('dotenv').config();
 
 const mailgunModel = {
     send: function send(res, req) {
-
         const apiKey = process.env.MG_API_KEY;
         const domain = process.env.MG_DOMAIN;
 
@@ -17,13 +17,13 @@ const mailgunModel = {
             subject: `${subject}`,
             text: `${text}`
         };
-        console.log(data);
+
         mg.messages().send(data, function (error, body) {
             if (error) {
                 return res.status(400).json ({
                     status: 400,
                     message: "Error, email was not sent."
-                })
+                });
             }
 
             console.log(body);
@@ -31,11 +31,10 @@ const mailgunModel = {
             return res.status(201).json({
                 status: 201,
                 message: "Email succesfully sent."
-            })
-
+            });
         });
     }
-}
+};
 
 module.exports = mailgunModel;
 

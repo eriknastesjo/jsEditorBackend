@@ -5,6 +5,8 @@
 
 /* global describe it */
 
+// Vi använder testdatabas istället för vår
+// databas i drift!
 process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
@@ -159,8 +161,6 @@ describe('Paths', () => {
                 });
         });
     });
-
-    // todo: skriv test för \find också (först insert sen find som när testar update)
 });
 
 

@@ -80,7 +80,7 @@ const docModel = {
             const filter = { _id: ObjectId(req._id) };
             const result = await db.collection.findOne(filter);
 
-            console.log(result);
+            // console.log(result);
 
             // Vi slår ihop data om dokumentet (typ name och content)
             // med id:et som kommer tillbaka när vi får in dokumentet i databasen med insertOne()
@@ -139,12 +139,11 @@ const docModel = {
 
             const filter = { _id: ObjectId(req._id) };
 
-            // because more than one user can be online at same time we need to first check if allowed_users has been updated
+            // because more than one user can be online at same time
+            // we need to first check if allowed_users has been updated
             const currentDoc = await this.findDoc(req);
 
             if (!currentDoc.allowed_users.includes(req.new_user)) {
-
-
                 const newAllowedUsers = [...currentDoc.allowed_users, req.new_user];
 
                 const updateDocument = {
@@ -161,7 +160,6 @@ const docModel = {
 
                 return result;
             }
-
         } catch (error) {
             return {
                 errors: {
@@ -182,7 +180,7 @@ const docModel = {
 
             const msg = `Database reset.`;
 
-            console.log(msg);
+            // console.log(msg);
             return msg;
         } catch (error) {
             return {
@@ -205,7 +203,7 @@ const docModel = {
 
             const msg = `${result.insertedCount} documents were inserted.`;
 
-            console.log(msg);
+            // console.log(msg);
 
             return msg;
         } catch (error) {
